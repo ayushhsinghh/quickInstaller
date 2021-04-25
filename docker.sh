@@ -7,7 +7,7 @@ echo "Determined platform: $DISTRO $VERSION"
 
 if [[ $DISTRO == 'Red Hat Enterprise Linux' ]]
 then 
-  if sudo rpm -q docker-ce &> /dev/null &> /dev/null
+  if sudo rpm -q docker-ce &> /dev/null 
     then
     echo "Docker Is Alrealy Installed!"
     else
