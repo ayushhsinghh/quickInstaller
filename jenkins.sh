@@ -9,7 +9,6 @@ then
     sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
     sudo yum upgrade
     sudo yum install jenkins -y
-    sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     sudo dnf install java-1.8.0-openjdk -y
     sudo systemctl daemon-reload
     sudo systemctl start jenkins
@@ -29,7 +28,7 @@ else
 echo "Sorry. This Script Will only Work On RedHat Linux"
 fi
 
-if systemctl status jenkins | grep active
+if systemctl status jenkins | grep active &> /dev/null
 then
     echo "Jenkins Is Installed Successfully..."
     echo "Jenkins Is Running at localhost:${YOURPORT}"
