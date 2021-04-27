@@ -1,11 +1,14 @@
 #!/usr/bin/bash
 
 DISTRO=$(cat /etc/*-release | grep -w NAME | cut -d= -f2 | tr -d '"')
-echo "Determined platform: $DISTRO"
+VERSION=$(cat /etc/*-release | grep VERSION | awk ' /VERSION_ID/ {print}' | cut -d = -f2 | tr -d  '"')
+echo "Determined platform: $DISTRO $VERSION"
+
 
 if [[ $DISTRO == 'Red Hat Enterprise Linux' ]]
 then
-    sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
+    sudo yum install wget -y
+    sudo cp jenkins.repo /etc/yum.repos.d/jenkins.repo
     sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
     sudo yum upgrade
     sudo yum install jenkins -y
